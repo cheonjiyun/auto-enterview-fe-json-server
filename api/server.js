@@ -42,6 +42,7 @@ const rules = auth.rewriter({
         "/appliedJobPosting?candidateKey=:candidateKey",
 });
 
+server.db = router.db; // 여기서도 db 연결 필요
 server.use(rules);
 server.use(auth);
 server.use(router);
