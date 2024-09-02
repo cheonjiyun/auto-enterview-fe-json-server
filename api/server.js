@@ -17,6 +17,12 @@ const router = jsonServer.router("db.json");
 
 const middlewares = jsonServer.defaults();
 
+server.use((req, rs, next) => {
+    res.header("Access-Control-Allow-Origin", "https://auto-enterview-fe.vercel.app/");
+    res.header("Access-Control-Allow-Credentials", true);
+    next();
+});
+
 server.use(auth);
 // Add this before server.use(router)
 server.use(
@@ -33,7 +39,6 @@ server.use(
             "/appliedJobPosting?candidateKey=:candidateKey",
     })
 );
-server.use(cors()).options("https://auto-enterview-fe.vercel.app/", cors());
 server.use(router);
 server.listen(3001, () => {
     console.log("JSON Server is running");
