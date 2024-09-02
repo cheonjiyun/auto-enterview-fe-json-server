@@ -21,6 +21,8 @@ server.use(auth);
 // Add this before server.use(router)
 server.use(
     jsonServer.rewriter({
+        users: 600,
+        messages: 640,
         "/common/job-postings?page=:page": "/job-postings?_page=:page&_limit=24",
         "/common/job-postings/:jobPostingKey": "/job-postings/:jobPostingKey",
         "/companies/:companyKey/information": "/companies/:companyKey",
