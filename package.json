@@ -1,13 +1,13 @@
 {
-  "name": "json-server-vercel",
-  "version": "1.0.0",
-  "description": "Deploy JSON Server to Vercel",
-  "main": "api/server.js",
-  "scripts": {
-    "start": "node api/server.js"
-  },
-  "dependencies": {
-    "json-server": "^0.17.4",
-    "json-server-auth": "^2.1.0"
-  }
+    "name": "json-server-vercel",
+    "version": "1.0.0",
+    "description": "Deploy JSON Server to Vercel",
+    "main": "api/server.js",
+    "scripts": {
+        "start": "json-server-auth --watch db.json --routes routes.json --port 3001"
+    },
+    "dependencies": {
+        "json-server": "^0.17.4",
+        "json-server-auth": "^2.1.0"
+    }
 }

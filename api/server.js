@@ -30,6 +30,8 @@ const rules = auth.rewriter({
     users: 600,
     messages: 640,
     // Other rules
+    "/users*": "/600/users$1",
+    "/messages*": "/640/messages$1",
     "/common/job-postings?page=:page": "/job-postings?_page=:page&_limit=24",
     "/common/job-postings/:jobPostingKey": "/job-postings/:jobPostingKey",
     "/companies/:companyKey/information": "/companies/:companyKey",
