@@ -1,7 +1,7 @@
 // See https://github.com/typicode/json-server#module
-const jsonServer = require('json-server')
+const jsonServer = require("json-server");
 
-const server = jsonServer.create()
+const server = jsonServer.create();
 
 // Uncomment to allow write operations
 // const fs = require('fs')
@@ -12,20 +12,28 @@ const server = jsonServer.create()
 // const router = jsonServer.router(db)
 
 // Comment out to allow write operations
-const router = jsonServer.router('db.json')
+const router = jsonServer.router("db.json");
 
-const middlewares = jsonServer.defaults()
+const middlewares = jsonServer.defaults();
 
-server.use(middlewares)
+server.use(middlewares);
 // Add this before server.use(router)
-server.use(jsonServer.rewriter({
-    '/api/*': '/$1',
-    '/blog/:resource/:id/show': '/:resource/:id'
-}))
-server.use(router)
-server.listen(3000, () => {
-    console.log('JSON Server is running')
-})
+server.use(
+    jsonServer.rewriter({
+        "/common/job-postings?page=:page": "/job-postings?_page=:page&_limit=24",
+        "/common/job-postings/:jobPostingKey": "/job-postings/:jobPostingKey",
+        "/companies/:companyKey/information": "/companies/:companyKey",
+        "/companies/:companyKey/job-postings": "/job-postings",
+        "/companies/:companyKey/posted-job-postings": "/job-postings?companyKey=:companyKey",
+        "/job-postings/:jobPostingKey/apply": "/appliedJobPosting/",
+        "/candidates/:candidateKey/applied-job-postings":
+            "/appliedJobPosting?candidateKey=:candidateKey",
+    })
+);
+server.use(router);
+server.listen(3001, () => {
+    console.log("JSON Server is running");
+});
 
 // Export the Server API
-module.exports = server
+module.exports = server;
