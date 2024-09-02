@@ -24,26 +24,28 @@ const middlewares = jsonServer.defaults();
 // });
 
 server.use(middlewares);
-server.use(auth);
 // Add this before server.use(router)
-server.use(
-    jsonServer.rewriter({
-        users: 600,
-        messages: 640,
-        "/common/job-postings?page=:page": "/job-postings?_page=:page&_limit=24",
-        "/common/job-postings/:jobPostingKey": "/job-postings/:jobPostingKey",
-        "/companies/:companyKey/information": "/companies/:companyKey",
-        "/companies/:companyKey/job-postings": "/job-postings",
-        "/companies/:companyKey/posted-job-postings": "/job-postings?companyKey=:companyKey",
-        "/job-postings/:jobPostingKey/apply": "/appliedJobPosting/",
-        "/candidates/:candidateKey/applied-job-postings":
-            "/appliedJobPosting?candidateKey=:candidateKey",
-    })
-);
+const rules = auth.rewriter({
+    // Permission rules
+    users: 600,
+    messages: 640,
+    // Other rules
+    "/common/job-postings?page=:page": "/job-postings?_page=:page&_limit=24",
+    "/common/job-postings/:jobPostingKey": "/job-postings/:jobPostingKey",
+    "/companies/:companyKey/information": "/companies/:companyKey",
+    "/companies/:companyKey/job-postings": "/job-postings",
+    "/companies/:companyKey/posted-job-postings": "/job-postings?companyKey=:companyKey",
+    "/job-postings/:jobPostingKey/apply": "/appliedJobPosting/",
+    "/candidates/:candidateKey/applied-job-postings":
+        "/appliedJobPosting?candidateKey=:candidateKey",
+});
+
+server.use(rules);
+server.use(auth);
 server.use(router);
+
 server.listen(3001, () => {
     console.log("JSON Server is running");
 });
-
 // Export the Server API
 module.exports = server;
