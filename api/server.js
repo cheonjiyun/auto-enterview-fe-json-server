@@ -33,6 +33,7 @@ server.use(
             "/appliedJobPosting?candidateKey=:candidateKey",
     })
 );
+server.use(cors()).options("https://auto-enterview-fe.vercel.app/", cors());
 server.use(router);
 server.listen(3001, () => {
     console.log("JSON Server is running");
