@@ -42,7 +42,7 @@ const rules = auth.rewriter({
   "/candidates/:candidateKey/applied-job-postings":
     "/appliedJobPosting?candidateKey=:candidateKey",
   "/job-postings/:jobPostingKey/candidates-list":
-    "/job-postings?jobPostingKey=:jobPostingKey",
+    "/candidates?jobPostingKey=:jobPostingKey",
   "/candidates/:candidateKey/resume": "/resume?candidateKey=:candidateKey",
 });
 
